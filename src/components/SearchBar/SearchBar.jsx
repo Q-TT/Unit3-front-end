@@ -1,27 +1,51 @@
 import React, { useState } from 'react';
+const apiKey = import.meta.env.API_KEY;
+import MovieForm from '../MovieForm/MovieForm';
+import { Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-function SearchBar({ onSearch }) {
+
+function SearchBar() {
   const [searchTerm, setSearchTerm] = useState('');
+  const [results, setResults] = useState([]);
 
   const handleInputChange = (event) => {
     setSearchTerm(event.target.value);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    onSearch(searchTerm);
+  const handleSearch = async () => {
+    try {
+      const response = await fetch(`https://www.omdbapi.com/?s=${searchTerm}&apikey=9b18590f`);
+      const data = await response.json();
+      setResults(data.Search);
+      console.log(results);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
   };
 
+  const [showOtherComponent, setShowOtherComponent] = useState(false);
+
+
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        placeholder="Search..."
-        value={searchTerm}
-        onChange={handleInputChange}
-      />
-      <button type="submit">Search</button>
-    </form>
+    <div>
+      <input type="text" value={searchTerm} onChange={handleInputChange} />
+      <button onClick={handleSearch}>Search</button>
+      <ul style={{ listStyleType: 'none' }}>
+        {results.map((result) => (
+          <li key={result.id}> 
+            <img src={result.Poster}/>
+            <p> 
+                {result.Title} 
+            </p>
+            <p> 
+                {result.Type} in [{result.Year}]       
+            </p>
+            <Link to="/watch-list/new">Add your review</Link>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 

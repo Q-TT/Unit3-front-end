@@ -10,6 +10,7 @@ import SignupForm from './components/SignupForm/SignupForm';
 import SigninForm from './components/SigninForm/SigninForm';
 import WatchList from './components/WatchList/WatchList';
 import MovieDetails from './components/MovieDetails/MovieDetails';
+import MovieForm from './components/MovieForm/MovieForm';
 
 //import severvices
 import * as authService from '../src/services/authService'; 
@@ -47,6 +48,7 @@ const App = () => {
               <Route path="/" element={<Dashboard user={user} />} />
               <Route path="/watch-list" element={<WatchList watchList={watchList}/>}> </Route> 
               <Route path="/watch-list/:movieId" element={<MovieDetails/>} />
+              <Route path="/watch-list/new" element={<MovieForm/>} />
             </>
           ) : (
               <Route path="/" element={<Landing />} />
