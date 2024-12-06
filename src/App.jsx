@@ -45,7 +45,7 @@ const App = () => {
             <>
               <Route path="/" element={<Dashboard user={user} />} />
               <Route path="/watch-list" element={<WatchList watchList={watchList}/>}> </Route> 
-              <Route path="/watch-list/:movieId" element={<MovieDetails />} />
+              <Route path="/watch-list/:movieId" element={<MovieDetails/>} />
             </>
           ) : (
               <Route path="/" element={<Landing />} />
