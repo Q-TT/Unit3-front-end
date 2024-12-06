@@ -14,6 +14,7 @@ import MovieDetails from './components/MovieDetails/MovieDetails';
 //import severvices
 import * as authService from '../src/services/authService'; 
 import * as watchListService from '../src/services/watchListService'
+import SearchBar from './components/SearchBar/SearchBar';
 
 
 export const AuthedUserContext = createContext(null);

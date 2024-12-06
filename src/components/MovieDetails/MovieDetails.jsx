@@ -14,7 +14,6 @@ const MovieDetails = (props) => {
       };
       fetchMovie();
     }, [movieId]);
-    console.log(movie)
 
     if (!movie) return <main>Loading...</main>;
     return (

@@ -1,8 +1,13 @@
 import { AuthedUserContext } from '../../App';
 import { useContext } from 'react';
+import { useState, useEffect } from 'react';
+import SearchBar from '../SearchBar/SearchBar';
+
 
 const Dashboard = ({}) => {
   const user = useContext(AuthedUserContext);
+
+ 
   return (
     <main>
       <h1>Welcome, {user.username}</h1>
@@ -10,6 +15,7 @@ const Dashboard = ({}) => {
         This is the dashboard page where you, and only you, can see a dashboard
         of all of your things.
       </p>
+      <SearchBar></SearchBar>
     </main>
   );
 };
