@@ -36,20 +36,17 @@ function SearchBar() {
           console.log(result)
         return (
           <li key={result.id}> 
-              <img src={result.Poster}/>
-              <p> 
-                  {result.Title} 
-              </p>
-              <p> 
-                  {result.Type} in [{result.Year}]       
-              </p>
-              <Link to= "/watch-list/new" state={ result }>Next Step</Link>
-              {/* <Link to="/watch-list/new" element={<MovieForm result={result}/>}>Add your review</Link> */}
-            </li>
-
-
-        )
-})}
+            <img src={result.Poster}/>
+            <p> 
+                {result.Title} 
+            </p>
+            <p> 
+                {result.Type} in [{result.Year}]       
+            </p>
+            <Link to= "/watch-list/new" state={ result }>Next Step</Link>
+            {/* <Link to="/watch-list/new" element={<MovieForm result={result}/>}>Add your review</Link> */}
+          </li> )
+        })}
       </ul>
     </div>
   );
