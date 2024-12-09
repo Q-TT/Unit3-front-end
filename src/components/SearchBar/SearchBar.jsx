@@ -18,13 +18,12 @@ function SearchBar() {
       const response = await fetch(`https://www.omdbapi.com/?s=${searchTerm}&apikey=9b18590f`);
       const data = await response.json();
       setResults(data.Search);
+      console.log(results)
      
     } catch (error) {
       console.error('Error fetching data:', error);
     }
   };
-
-  const [showOtherComponent, setShowOtherComponent] = useState(false);
 
 
   return (
@@ -43,7 +42,7 @@ function SearchBar() {
             <p> 
                 {result.Type} in [{result.Year}]       
             </p>
-            <Link to= "/watch-list/new" state={ result }>Next Step</Link>
+            <Link to= "/watch-list/new" state={ result }>Add to list</Link>
             {/* <Link to="/watch-list/new" element={<MovieForm result={result}/>}>Add your review</Link> */}
           </li> )
         })}

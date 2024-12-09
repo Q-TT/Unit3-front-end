@@ -17,7 +17,12 @@ const MovieForm = () => {
 const handleChange = (evt) => {
     setFormData({ ...formData, [evt.target.name]: evt.target.value });
   };
-
+  
+const handleSubmit = (evt) => {
+  evt.preventDefault();
+  console.log('formData', formData);
+  // We'll update this function shortly...
+}
   return (
     <div>
       <form>
