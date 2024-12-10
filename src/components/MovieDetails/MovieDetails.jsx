@@ -1,11 +1,14 @@
 import { useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import * as watchListService from '../../services/watchListService'
 import CommentForm from '../CommentForm/CommentForm';
 import WatchList from '../WatchList/WatchList';
+import { AuthedUserContext } from '../../App';
 
 const MovieDetails = (props) => {
     const { movieId } = useParams();
+    const user = useContext(AuthedUserContext);
+
     const [movie, setMovie] = useState(null);
     
     useEffect(() => {
@@ -55,20 +58,25 @@ const MovieDetails = (props) => {
               </li>
             </ul>
             <p>Review: {movie.Review}</p>
-        <h2>Comments</h2>
-        <h4>Comments on the review:</h4>
-        {/* <ul style={{ listStyleType: 'none' }}> */}
-          {movie.Comments.map((eachComment) => {
-          return (
-            <li key={eachComment.id} style={{ listStyleType: 'number' }}>  
-              {eachComment.text} 
-              <p>
-                {eachComment.author.username} posted on
-                {new Date(eachComment.createdAt).toLocaleDateString()}
-              </p>          
-            </li>
-          )
-          })}
+            {movie.author === user._id && (
+              <>
+                <button onClick={() => props.handleDeleteMovie(movieId)}>Delete</button> 
+              </>
+            )}
+            <h2>Comments</h2>
+            <h4>Comments on the review:</h4>
+            {/* <ul style={{ listStyleType: 'none' }}> */}
+              {movie.Comments.map((eachComment) => {
+                return (
+                  <li key={eachComment.id} style={{ listStyleType: 'number' }}>  
+                    {eachComment.text} 
+                    <p>
+                      {eachComment.author.username} posted on
+                      {new Date(eachComment.createdAt).toLocaleDateString()}
+                    </p>          
+                  </li>
+                )
+              })}
         {/* </ul> */}
 
         <CommentForm handleAddComment={handleAddComment}/>

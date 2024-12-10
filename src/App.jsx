@@ -48,6 +48,12 @@ const App = () => {
     navigate('/watch-list');
   };
 
+  const handleDeleteMovie = async (movieId) => {
+    const deletedMovie = await watchListService.deleteMovie(movieId);
+    setWatchList(watchList.filter((movie) => movie._id !== deletedMovie._id));
+    navigate('/watch-list');
+  };
+
   return (
     <>
       <AuthedUserContext.Provider value={user}>
@@ -57,7 +63,7 @@ const App = () => {
             <>
               <Route path="/" element={<Dashboard user={user} />} />
               <Route path="/watch-list" element={<WatchList watchList={watchList}/>}> </Route> 
-              <Route path="/watch-list/:movieId" element={<MovieDetails/>} />
+              <Route path="/watch-list/:movieId" element={<MovieDetails handleDeleteMovie={handleDeleteMovie}/>} />
               <Route path="/watch-list/new" element={<MovieForm handleAddMovie={handleAddMovie}/>} />
             </>
           ) : (
