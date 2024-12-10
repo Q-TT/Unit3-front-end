@@ -1,6 +1,6 @@
 //import libraries
 import { useState, createContext, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate  } from 'react-router-dom';
 
 // import components
 import NavBar from './components/NavBar/NavBar';
@@ -12,6 +12,7 @@ import WatchList from './components/WatchList/WatchList';
 import MovieDetails from './components/MovieDetails/MovieDetails';
 import MovieForm from './components/MovieForm/MovieForm';
 
+
 //import severvices
 import * as authService from '../src/services/authService'; 
 import * as watchListService from '../src/services/watchListService'
@@ -21,8 +22,10 @@ import SearchBar from './components/SearchBar/SearchBar';
 export const AuthedUserContext = createContext(null);
 
 const App = () => {
+  const navigate = useNavigate();
   const [user, setUser] = useState(authService.getUser()); // using the method from authservice
   const [watchList, setWatchList] = useState([])
+  
 
   const handleSignout = () => {
     authService.signout();
@@ -38,6 +41,13 @@ const App = () => {
     if (user) fetchAllWatchLists();
   }, [user])
 
+  const handleAddMovie = async (movieFormData) => {
+    console.log('movieFormData', movieFormData);
+    const newMovie = await watchListService.create(movieFormData);
+    setWatchList([newMovie, ...watchList])
+    navigate('/watch-list');
+  };
+
   return (
     <>
       <AuthedUserContext.Provider value={user}>
@@ -48,7 +58,7 @@ const App = () => {
               <Route path="/" element={<Dashboard user={user} />} />
               <Route path="/watch-list" element={<WatchList watchList={watchList}/>}> </Route> 
               <Route path="/watch-list/:movieId" element={<MovieDetails/>} />
-              <Route path="/watch-list/new" element={<MovieForm/>} />
+              <Route path="/watch-list/new" element={<MovieForm handleAddMovie={handleAddMovie}/>} />
             </>
           ) : (
               <Route path="/" element={<Landing />} />

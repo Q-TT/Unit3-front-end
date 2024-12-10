@@ -17,19 +17,20 @@ const MovieForm = () => {
 const handleChange = (evt) => {
     setFormData({ ...formData, [evt.target.name]: evt.target.value });
   };
-  
+
 const handleSubmit = (evt) => {
   evt.preventDefault();
+  props.handleAddMovie(formData);
   console.log('formData', formData);
   // We'll update this function shortly...
 }
   return (
     <div>
       <form>
-        <label htmlFor="name"> Name </label>
+        <label htmlFor="title"> Name </label>
         <input
-          id="name"
-          name="name"
+          id="title"
+          name="Title"
           value={formData.Title}    
           onChange={handleChange}
           required 
@@ -37,7 +38,7 @@ const handleSubmit = (evt) => {
         <label htmlFor="year"> Year </label>
         <input
           id="year"
-          name="year"
+          name="Year"
           value={formData.Year}  
           onChange={handleChange}
           required   
@@ -46,7 +47,7 @@ const handleSubmit = (evt) => {
         <textarea
           type="text"
           id="comment"
-          name="comment"
+          name="Comment"
           value={formData.Comment}  
           onChange={handleChange}
           required   

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 const apiKey = import.meta.env.API_KEY;
-import MovieForm from '../MovieForm/MovieForm';
 import { Link } from 'react-router-dom';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
@@ -15,15 +14,16 @@ function SearchBar() {
 
   const handleSearch = async () => {
     try {
-      const response = await fetch(`https://www.omdbapi.com/?s=${searchTerm}&apikey=9b18590f`);
+      const response = await fetch(`https://www.omdbapi.com/?apikey=9b18590f&s=${searchTerm}`);
       const data = await response.json();
+      console.log(data)
       setResults(data.Search);
-      console.log(results)
      
     } catch (error) {
       console.error('Error fetching data:', error);
     }
   };
+
 
 
   return (
@@ -42,13 +42,13 @@ function SearchBar() {
             <p> 
                 {result.Type} in [{result.Year}]       
             </p>
-            <Link to= "/watch-list/new" state={ result }>Add to list</Link>
-            {/* <Link to="/watch-list/new" element={<MovieForm result={result}/>}>Add your review</Link> */}
+            <Link to= "/watch-list/new" state={ result } >Add to list</Link>
           </li> )
         })}
       </ul>
     </div>
   );
+
 }
 
 export default SearchBar;
