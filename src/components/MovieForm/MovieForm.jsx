@@ -77,7 +77,7 @@ const handleSubmit = (evt) => {
           // onChange={handleChange}
           readOnly 
         />
-        <label htmlFor="Review"> Comment </label>
+        <label htmlFor="Review"> Review </label>
         <textarea
           type="text"
           id="Review"
@@ -86,7 +86,7 @@ const handleSubmit = (evt) => {
           onChange={handleReviewChange}
           required   
         />
-        <button type="submit">Add Comments</button>
+        <button type="submit">Add To Watch List</button>
       </form>
     </div>
 )}
