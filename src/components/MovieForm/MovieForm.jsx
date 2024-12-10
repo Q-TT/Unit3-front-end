@@ -8,11 +8,12 @@ const MovieForm = (props) => {
   // console.log(props)
   const location = useLocation()
   const fromResult  = location.state
+  const [review, setReview] = useState("")
   const [formData, setFormData] = useState({
     Title: `${fromResult.Title}`,
     Year: `${fromResult.Year}`,
     Type: `${fromResult.Type}`,
-    Review: "",
+    Review: `${review}`,
   });
 
 const { movieId } = useParams();
@@ -25,9 +26,17 @@ useEffect(() => {
   fetchMovie();
 }, [movieId]);
 
-const handleChange = (evt) => {
-    setFormData({ ...formData, [evt.target.name]: evt.target.value });
-  };
+const handleReviewChange = (evt) => {
+  setReview(evt.target.value);
+  setFormData(
+    {
+      Title: `${fromResult.Title}`,
+      Year: `${fromResult.Year}`,
+      Type: `${fromResult.Type}`,
+      Review: `${review}`,
+    }
+  )
+};
 
 const handleSubmit = (evt) => {
   evt.preventDefault();
@@ -47,8 +56,8 @@ const handleSubmit = (evt) => {
           id="Title"
           name="Title"
           value={formData.Title}    
-          onChange={handleChange}
-          
+          // onChange={handleChange}
+          readOnly        
         />
         <label htmlFor="Type">Type </label>
         <input
@@ -56,7 +65,8 @@ const handleSubmit = (evt) => {
           id="Type"
           name="Type"
           value={formData.Type} 
-          onChange={handleChange}   
+          // onChange={handleChange} 
+          readOnly   
         />
         <label htmlFor="Year"> Year </label>
         <input
@@ -64,7 +74,8 @@ const handleSubmit = (evt) => {
           id="Year"
           name="Year"
           value={formData.Year}  
-          onChange={handleChange}
+          // onChange={handleChange}
+          readOnly 
         />
         <label htmlFor="Review"> Comment </label>
         <textarea
@@ -72,7 +83,7 @@ const handleSubmit = (evt) => {
           id="Review"
           name="Review"
           value={formData.Comment}  
-          onChange={handleChange}
+          onChange={handleReviewChange}
           required   
         />
         <button type="submit">Add Comments</button>
