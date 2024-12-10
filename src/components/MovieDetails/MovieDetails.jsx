@@ -18,34 +18,31 @@ const MovieDetails = (props) => {
     if (!movie) return <main>Loading...</main>;
     return (
       <main> 
-        <h2>{movie.title}</h2> 
+        <h2>{movie.Title}</h2> 
         <ul>
               <li>
-                Year: {movie.year}
+                Year: {movie.Year}
               </li>
               <li>
-                Country: {movie.country} 
+                Country: {movie.Country} 
               </li>
               <li>
-                Language: {movie.language} 
+                Language: {movie.Language} 
               </li>
               <li>
-                Category: {movie.category}
+                Director: {movie.Director}
               </li>
               <li>
-                Director: {movie.director}
-              </li>
-              <li>
-                Actors: {movie.actors}
+                Actors: {movie.Actors}
               </li>
               <li>
                 IMDB rating: {movie.imdbRating}
               </li>
               <li>
-                Plot: {movie.plot}
+                Plot: {movie.Plot}
               </li>
             </ul>
-            <p>Review: {movie.review}</p>
+            <p>Review: {movie.Review}</p>
       </main>
     )
 }

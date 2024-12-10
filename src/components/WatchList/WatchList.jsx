@@ -6,9 +6,9 @@ const WatchList = (props) => {
       {props.watchList.map((movie) => (
         <>
           <Link key={movie._id} to={`/watch-list/${movie._id}`}>
-            <h2>{movie.title}</h2>
+            <h2>{movie.Title}</h2>
           </Link>
-            <p>Review: {movie.review}</p>
+            <p> Review: {movie.Review}</p>
             <p> Review created at: {new Date(movie.createdAt).toLocaleDateString()}</p> 
         </>
       ))}

@@ -25,7 +25,6 @@ function SearchBar() {
   };
 
 
-
   return (
     <div>
       <input type="text" value={searchTerm} onChange={handleInputChange} />
@@ -37,13 +36,19 @@ function SearchBar() {
           <li key={result.id}> 
             <img src={result.Poster}/>
             <p> 
-                {result.Title} 
+              {result.Title} 
             </p>
             <p> 
-                {result.Type} in [{result.Year}]       
+              Type: {result.Type}      
+            </p>
+            <p> 
+              Year: {result.Year}  
+            </p>
+            <p> 
+              imdbID: {result.imdbID}       
             </p>
             <Link to= "/watch-list/new" state={ result } >Add to list</Link>
-          </li> )
+          </li>)
         })}
       </ul>
     </div>
