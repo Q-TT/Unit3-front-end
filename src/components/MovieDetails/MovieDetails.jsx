@@ -5,6 +5,9 @@ import CommentForm from '../CommentForm/CommentForm';
 import WatchList from '../WatchList/WatchList';
 import { AuthedUserContext } from '../../App';
 
+import styles from './MovieDetails.module.css'
+
+
 const MovieDetails = (props) => {
     const { movieId } = useParams();
     const user = useContext(AuthedUserContext);
@@ -29,7 +32,7 @@ const MovieDetails = (props) => {
 
     if (!movie) return <main>Loading...</main>;
     return (
-      <main> 
+      <main className={styles.container}> 
         <h2>{movie.Title}</h2> 
         <ul>
               <li> 
@@ -38,7 +41,7 @@ const MovieDetails = (props) => {
               <li> 
                 Year: {movie.Year}  
               </li>
-              <li>
+              {/* <li>
                 Country: {movie.Country} 
               </li>
               <li>
@@ -55,17 +58,21 @@ const MovieDetails = (props) => {
               </li>
               <li>
                 Plot: {movie.Plot}
-              </li>
+              </li> */}
             </ul>
-            <p>Review: {movie.Review}</p>
+            <h4>Review: </h4>
+            <p>{movie.Review}</p>
             {movie.author === user._id && (
               <>
                 <button onClick={() => props.handleDeleteMovie(movieId)}>Delete</button> 
               </>
             )}
+            <br></br>
+            <br></br>
+    
             <h2>Comments</h2>
             <h4>Comments on the review:</h4>
-            {/* <ul style={{ listStyleType: 'none' }}> */}
+            <ul style={{ listStyleType: 'none' }}>
               {movie.Comments.map((eachComment) => {
                 return (
                   <li key={eachComment.id} style={{ listStyleType: 'number' }}>  
@@ -77,7 +84,7 @@ const MovieDetails = (props) => {
                   </li>
                 )
               })}
-        {/* </ul> */}
+            </ul>
 
         <CommentForm handleAddComment={handleAddComment}/>
       </main>
