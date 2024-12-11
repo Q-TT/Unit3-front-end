@@ -1,11 +1,23 @@
+import styles from './Landing.module.css';
+import logo from '../../assets/logo.jpg'
+
 const Landing = () => {
   return (
-    <main>
-      <h1>Hello, you are on the landing page for visitors.</h1>
-      <h3>
-        If you sign up for a new account, you will have the ability to sign in
-        and see your super secret dashboard.
-      </h3>
+    <main className={styles.container}>
+      <section className={styles.splash}>
+          <img src={logo} alt="movie logo" />
+      </section>
+
+      <section className={styles.about}>
+        <header>
+          <h1>Hello, welcom to To-Watch!</h1>
+        </header>
+        <article>
+          <p>
+            If you haven't sign up for a new account, please sign up first to use all the features!
+          </p>
+        </article>
+      </section>
     </main>
   );
 };
