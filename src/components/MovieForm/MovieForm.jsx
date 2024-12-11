@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import * as watchListService from '../../services/watchListService'
 
+import styles from '../MovieForm/MovieForm.module.css'
 
 const MovieForm = (props) => {
   // console.log(props)
@@ -49,7 +50,7 @@ const handleSubmit = (evt) => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className={styles.movieFormContainer} >
         <label htmlFor="Title"> Name </label>
         <input
           type="text"
@@ -77,6 +78,7 @@ const handleSubmit = (evt) => {
           // onChange={handleChange}
           readOnly 
         />
+        <hr></hr>
         <label htmlFor="Review"> Review </label>
         <textarea
           type="text"
@@ -86,7 +88,7 @@ const handleSubmit = (evt) => {
           onChange={handleReviewChange}
           required   
         />
-        <button type="submit">Add To Watch List</button>
+        <button type="submit" className={styles.button}>Add To Watch List</button>
       </form>
     </div>
 )}
